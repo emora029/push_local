@@ -34,14 +34,26 @@ class PushNotificationProvider{
       onLaunch: (info) async {
         print('---- onLaunch ----');
         print(info);
+
+        String argument = 'no-data';
+        if(Platform.isAndroid) {
+          argument = info['data']['dinbog'] ?? 'no-data';
+        }
+
+        _messagesStreamController.sink.add(argument);
+        
       },
 
       onResume: (info) async {
         print('---- onResume ----');
         print(info);
 
-        final noti = info['data']['dinbog'];
-        _messagesStreamController.sink.add(noti);
+        String argument = 'no-data';
+        if(Platform.isAndroid) {
+          argument = info['data']['dinbog'] ?? 'no-data';
+        }
+
+        _messagesStreamController.sink.add(argument);
       }
 
     );
